@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Billy Friend | Baja Sur Luxury Properties</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue: #0f509b;
+    --orange: #dd7447;
+    --bg: #f4eeea;
+    --dark: #1a1512;
+    --sand: #e8ddd4;
+    --muted: #7a6e68;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 40px;
+    background: rgba(244,238,234,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(15,80,155,0.08);
+  }
+  .nav-logo img { height: 36px; }
+  .nav-agent {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+  }
+  .nav-cta {
+    background: var(--blue); color: #fff;
+    padding: 10px 22px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--orange); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 140px 40px 80px;
+    max-width: 960px; margin: 0 auto;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 6vw, 72px); font-weight: 300; line-height: 1.1;
+    color: var(--dark); margin-bottom: 20px;
+  }
+  .hero h1 em { font-style: italic; color: var(--blue); }
+  .hero p {
+    font-size: 15px; color: var(--muted); max-width: 520px; margin: 0 auto 36px;
+  }
+  .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--blue); color: #fff;
+    padding: 14px 32px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none; transition: background 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--orange); }
+  .btn-ghost {
+    border: 1px solid var(--blue); color: var(--blue);
+    padding: 14px 32px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { background: var(--blue); color: #fff; }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--orange) 30%, var(--blue) 70%, transparent); margin: 0 40px; opacity: 0.3; }
+
+  /* ── SECTION TITLE ── */
+  .section-label {
+    text-align: center; padding: 70px 40px 0;
+  }
+  .section-label span {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--orange);
+  }
+  .section-label h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 44px); font-weight: 300; color: var(--dark);
+    margin-top: 8px;
+  }
+
+  /* ── FEATURED (3 up top) ── */
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    max-width: 1280px; margin: 40px auto 0; padding: 0 40px;
+  }
+  @media(max-width: 900px) { .featured-grid { grid-template-columns: 1fr; } }
+
+  .feat-card {
+    position: relative; overflow: hidden; cursor: pointer;
+    aspect-ratio: 3/4;
+    text-decoration: none;
+  }
+  .feat-card img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s ease;
+    display: block;
+  }
+  .feat-card:hover img { transform: scale(1.05); }
+  .feat-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(20,12,6,0.82) 0%, rgba(20,12,6,0.1) 55%, transparent 100%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 28px 24px;
+  }
+  .feat-badge {
+    position: absolute; top: 20px; left: 20px;
+    background: var(--orange); color: #fff;
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 4px 10px;
+  }
+  .feat-location {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6); margin-bottom: 6px;
+  }
+  .feat-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 300; color: #fff; line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .feat-price {
+    font-size: 13px; font-weight: 500; color: var(--orange);
+    letter-spacing: 0.05em;
+  }
+  .feat-specs {
+    font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 4px;
+  }
+  .feat-cta {
+    margin-top: 14px; display: inline-block;
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.3);
+    color: #fff; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 8px 16px; transition: background 0.2s;
+  }
+  .feat-card:hover .feat-cta { background: var(--orange); border-color: var(--orange); }
+
+  /* ── PROPERTIES GRID ── */
+  .props-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    max-width: 1280px; margin: 40px auto 0; padding: 0 40px;
+  }
+
+  .prop-card {
+    background: #fff; text-decoration: none; display: block;
+    transition: box-shadow 0.2s; color: var(--dark);
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .prop-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+
+  .prop-img-wrap { position: relative; overflow: hidden; aspect-ratio: 4/3; }
+  .prop-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; display: block; }
+  .prop-card:hover .prop-img-wrap img { transform: scale(1.04); }
+
+  .prop-body { padding: 20px 22px 22px; }
+  .prop-location { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .prop-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 8px; }
+  .prop-price { font-size: 14px; font-weight: 500; color: var(--blue); }
+  .prop-specs { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .prop-view {
+    display: inline-block; margin-top: 14px;
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--orange); border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+  }
+  .prop-card:hover .prop-view { color: var(--blue); border-color: var(--blue); }
+
+  /* ── LOTS SECTION ── */
+  .lots-strip {
+    max-width: 1280px; margin: 40px auto 0; padding: 0 40px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2px;
+  }
+  .lot-card {
+    background: var(--blue); padding: 28px 24px; text-decoration: none; display: block;
+    transition: background 0.2s;
+  }
+  .lot-card:nth-child(2) { background: var(--dark); }
+  .lot-card:nth-child(3) { background: #1e3a5f; }
+  .lot-card:hover { background: var(--orange); }
+  .lot-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+  .lot-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: #fff; margin-bottom: 6px; }
+  .lot-price { font-size: 13px; color: rgba(255,255,255,0.8); }
+  .lot-arrow { font-size: 18px; color: rgba(255,255,255,0.4); margin-top: 16px; display: block; }
+
+  /* ── LEAD FORM ── */
+  #contact {
+    max-width: 640px; margin: 80px auto; padding: 0 40px;
+  }
+  .form-box {
+    background: var(--dark); padding: 52px 48px;
+  }
+  @media(max-width: 600px) { .form-box { padding: 36px 24px; } }
+  .form-eyebrow { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
+  .form-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: #fff; margin-bottom: 6px; }
+  .form-sub { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 32px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media(max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+
+  .form-group { display: flex; flex-direction: column; margin-bottom: 14px; }
+  .form-group label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 6px; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #fff; padding: 12px 14px; font-family: 'DM Sans', sans-serif;
+    font-size: 14px; outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--orange); }
+  .form-group select option { background: #1a1512; }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+
+  .form-submit {
+    width: 100%; background: var(--orange); color: #fff; border: none;
+    padding: 15px; font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s; margin-top: 8px;
+  }
+  .form-submit:hover { background: var(--blue); }
+  .form-note { font-size: 11px; color: rgba(255,255,255,0.3); text-align: center; margin-top: 14px; }
+
+  /* ── AGENT BIO ── */
+  .agent-strip {
+    background: #fff; border-top: 1px solid var(--sand); border-bottom: 1px solid var(--sand);
+    padding: 50px 40px;
+    display: flex; align-items: center; justify-content: center; gap: 40px;
+    flex-wrap: wrap; text-align: center; max-width: 960px; margin: 0 auto 60px;
+  }
+  .agent-avatar {
+    width: 90px; height: 90px; border-radius: 50%;
+    background: var(--sand); overflow: hidden; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--blue);
+  }
+  .agent-info { max-width: 480px; text-align: left; }
+  .agent-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; }
+  .agent-title { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 4px 0 12px; }
+  .agent-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+  .agent-contact { margin-top: 14px; display: flex; gap: 20px; flex-wrap: wrap; }
+  .agent-link { font-size: 12px; color: var(--blue); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+  .agent-link:hover { border-color: var(--blue); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark); padding: 36px 40px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: gap;
+    gap: 16px;
+  }
+  footer .foot-logo img { height: 28px; filter: brightness(0) invert(1); opacity: 0.7; }
+  footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
+
+  /* ── ANIMATIONS ── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── SUCCESS ── */
+  .form-success {
+    display: none; text-align: center; padding: 40px 20px;
+  }
+  .form-success.active { display: block; }
+  .form-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--orange); margin-bottom: 8px; }
+  .form-success p { font-size: 13px; color: rgba(255,255,255,0.6); }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://ricardoamigo.com" class="nav-logo">
+    <img src="https://todossantosmexicorealestate.com/assets/img/logo.svg" alt="RARE">
+  </a>
+  <span class="nav-agent">Billy Friend · RARE Agent</span>
+  <a href="#contact" class="nav-cta">Request Info</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero reveal">
+  <p class="hero-eyebrow">Exclusive Portfolio · Baja California Sur</p>
+  <h1>Where the Pacific<br>meets <em>extraordinary</em> living</h1>
+  <p>Handpicked properties along Baja's most coveted coastline, presented by Billy Friend of Ricardo Amigo Real Estate.</p>
+  <div class="hero-actions">
+    <a href="#featured" class="btn-primary">Explore Listings</a>
+    <a href="#contact" class="btn-ghost">Speak with Billy</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FEATURED SECTION -->
+<div class="section-label reveal" id="featured">
+  <span>Featured Properties</span>
+  <h2>Premier Selections</h2>
+</div>
+
+<div class="featured-grid">
+
+  <!-- 1. Bocana Paradise -->
+  <a class="feat-card reveal" href="https://ricardoamigo.com/for-sale/bocana-paradise/25-5584" target="_blank">
+    <img src="https://cdn.resize.sparkplatform.com/cab/1280x1024/true/20251206025348389177000000-o.jpg" alt="Bocana Paradise" loading="lazy">
+    <div class="feat-overlay">
+      <span class="feat-badge">Featured</span>
+      <div class="feat-location">Todos Santos · El Posito</div>
+      <div class="feat-name">Bocana Paradise</div>
+      <div class="feat-price">$950,000 USD</div>
+      <div class="feat-specs">11,996 m² · Oceanfront Lot · Escritura</div>
+      <span class="feat-cta">View Property →</span>
+    </div>
+  </a>
+
+  <!-- 2. Casa Brillante -->
+  <a class="feat-card reveal" href="https://ricardoamigo.com/for-sale/casa-brillante/26-186" target="_blank">
+    <img src="https://cdn.resize.sparkplatform.com/cab/1280x1024/true/20260113024010961455000000-o.jpg" alt="Casa Brillante" loading="lazy">
+    <div class="feat-overlay">
+      <span class="feat-badge">Featured</span>
+      <div class="feat-location">Elias Calles</div>
+      <div class="feat-name">Casa Brillante</div>
+      <div class="feat-price">$1,495,000 USD</div>
+      <div class="feat-specs">3 Bed · 2 Bath · Pool · 4,000 m²</div>
+      <span class="feat-cta">View Property →</span>
+    </div>
+  </a>
+
+  <!-- 3. Rancho Patron -->
+  <a class="feat-card reveal" href="https://ricardoamigo.com/for-sale/rancho-patron/25-3645" target="_blank">
+    <img src="https://cdn.resize.sparkplatform.com/cab/1280x1024/true/20250408215657018022000000-o.jpg" alt="Rancho Patron" loading="lazy">
+    <div class="feat-overlay">
+      <span class="feat-badge">Featured</span>
+      <div class="feat-location">Pescadero · Baja Sur</div>
+      <div class="feat-name">Rancho Patron</div>
+      <div class="feat-price">Contact for Pricing</div>
+      <div class="feat-specs">Rancho · Premium Location</div>
+      <span class="feat-cta">View Property →</span>
+    </div>
+  </a>
+
+</div>
+
+<!-- ALL PROPERTIES GRID -->
+<div class="section-label reveal" style="padding-top:70px;">
+  <span>Full Portfolio</span>
+  <h2>All Billy's Listings</h2>
+</div>
+
+<div class="props-grid">
+
+  <!-- Casita Marbella -->
+  <a class="prop-card reveal" href="https://ricardoamigo.com/for-sale/casita-marbella/25-4911" target="_blank">
+    <div class="prop-img-wrap">
+      <img src="https://cdn.resize.sparkplatform.com/cab/640x480/true/20250714010009093861000000-o.jpg" alt="Casita Marbella" loading="lazy">
+    </div>
+    <div class="prop-body">
+      <div class="prop-location">Todos Santos</div>
+      <div class="prop-name">Casita Marbella</div>
+      <div class="prop-price">Inquire</div>
+      <div class="prop-specs">Charming casita · Prime location</div>
+      <span class="prop-view">View Listing →</span>
+    </div>
+  </a>
+
+  <!-- Casa Michelle -->
+  <a class="prop-card reveal" href="https://ricardoamigo.com/for-sale/casa-michelle/25-5034" target="_blank">
+    <div class="prop-img-wrap">
+      <img src="https://cdn.resize.sparkplatform.com/cab/640x480/true/20250728030150699434000000-o.jpg" alt="Casa Michelle" loading="lazy">
+    </div>
+    <div class="prop-body">
+      <div class="prop-location">Todos Santos</div>
+      <div class="prop-name">Casa Michelle</div>
+      <div class="prop-price">Inquire</div>
+      <div class="prop-specs">Residential home · Baja lifestyle</div>
+      <span class="prop-view">View Listing →</span>
+    </div>
+  </a>
+
+  <!-- Surf Villa -->
+  <a class="prop-card reveal" href="https://ricardoamigo.com/for-sale/surfing-villa/25-4764" target="_blank">
+    <div class="prop-img-wrap">
+      <img src="https://cdn.resize.sparkplatform.com/cab/640x480/true/20250707163845861893000000-o.jpg" alt="Surf Villa" loading="lazy">
+    </div>
+    <div class="prop-body">
+      <div class="prop-location">Pescadero · Cerritos</div>
+      <div class="prop-name">Surf Villa</div>
+      <div class="prop-price">Inquire</div>
+      <div class="prop-specs">With Ricky K · Surf access · Villa</div>
+      <span class="prop-view">View Listing →</span>
+    </div>
+  </a>
+
+  <!-- Secret Ocean Dream -->
+  <a class="prop-card reveal" href="https://ricardoamigo.com/for-sale/secret-ocean-dream/26-366" target="_blank">
+    <div class="prop-img-wrap">
+      <img src="https://cdn.resize.sparkplatform.com/cab/640x480/true/20260123015826918234000000-o.jpg" alt="Secret Ocean Dream" loading="lazy">
+    </div>
+    <div class="prop-body">
+      <div class="prop-location">Baja California Sur</div>
+      <div class="prop-name">Secret Ocean Dream</div>
+      <div class="prop-price">Inquire</div>
+      <div class="prop-specs">Ocean view · Hidden gem</div>
+      <span class="prop-view">View Listing →</span>
+    </div>
+  </a>
+
+  <!-- Lote Dulce Amanecer -->
+  <a class="prop-card reveal" href="https://ricardoamigo.com/for-sale/lote-dulce-amanecer/25-5411" target="_blank">
+    <div class="prop-img-wrap">
+      <img src="https://cdn.resize.sparkplatform.com/cab/640x480/true/20250830195840855688000000-o.jpg" alt="Lote Dulce Amanecer" loading="lazy">
+    </div>
+    <div class="prop-body">
+      <div class="prop-location">Todos Santos</div>
+      <div class="prop-name">Lote Dulce Amanecer</div>
+      <div class="prop-price">Inquire</div>
+      <div class="prop-specs">Land lot · Development potential</div>
+      <span class="prop-view">View Listing →</span>
+    </div>
+  </a>
+
+  <!-- Pescadero Panorama -->
+  <a class="prop-card reveal" href="https://ricardoamigo.com/for-sale/pescadero-panorama/23-4796" target="_blank">
+    <div class="prop-img-wrap">
+      <img src="https://cdn.resize.sparkplatform.com/cab/640x480/true/20231003182839218748000000-o.jpg" alt="Pescadero Panorama" loading="lazy">
+    </div>
+    <div class="prop-body">
+      <div class="prop-location">Pescadero</div>
+      <div class="prop-name">Pescadero Panorama</div>
+      <div class="prop-price">Inquire</div>
+      <div class="prop-specs">Panoramic views · Baja Sur</div>
+      <span class="prop-view">View Listing →</span>
+    </div>
+  </a>
+
+  <!-- High Cliff -->
+  <a class="prop-card reveal" href="https://ricardoamigo.com/for-sale/high-cliff-unobstructed-view/22-4832" target="_blank">
+    <div class="prop-img-wrap">
+      <img src="https://cdn.resize.sparkplatform.com/cab/640x480/true/20220916191453649621000000-o.jpg" alt="High Cliff" loading="lazy">
+    </div>
+    <div class="prop-body">
+      <div class="prop-location">Todos Santos</div>
+      <div class="prop-name">High Cliff</div>
+      <div class="prop-price">Inquire</div>
+      <div class="prop-specs">Unobstructed ocean view · Cliff lot</div>
+      <span class="prop-view">View Listing →</span>
+    </div>
+  </a>
+
+  <!-- Agua Blanca Beachfront 41 -->
+  <a class="prop-card reveal" href="https://ricardoamigo.com/for-sale/agua-blanca-beachfront-41/25-2032" target="_blank">
+    <div class="prop-img-wrap">
+      <img src="https://cdn.resize.sparkplatform.com/cab/640x480/true/20250326163532484748000000-o.jpg" alt="Agua Blanca Beachfront 41" loading="lazy">
+    </div>
+    <div class="prop-body">
+      <div class="prop-location">Agua Blanca · Beachfront</div>
+      <div class="prop-name">Agua Blanca Beachfront 41</div>
+      <div class="prop-price">Inquire</div>
+      <div class="prop-specs">Direct beach access · Lot 41</div>
+      <span class="prop-view">View Listing →</span>
+    </div>
+  </a>
+
+  <!-- Casa Milagros -->
+  <a class="prop-card reveal" href="https://ricardoamigo.com/for-sale/casa-milagros/24-6051" target="_blank">
+    <div class="prop-img-wrap">
+      <img src="https://cdn.resize.sparkplatform.com/cab/640x480/true/20241010181049023831000000-o.jpg" alt="Casa Milagros" loading="lazy">
+    </div>
+    <div class="prop-body">
+      <div class="prop-location">Todos Santos</div>
+      <div class="prop-name">Casa Milagros</div>
+      <div class="prop-price">Inquire</div>
+      <div class="prop-specs">Residential · Todos Santos living</div>
+      <span class="prop-view">View Listing →</span>
+    </div>
+  </a>
+
+  <!-- Casa Della -->
+  <a class="prop-card reveal" href="https://ricardoamigo.com/for-sale/casa-della/24-4040" target="_blank">
+    <div class="prop-img-wrap">
+      <img src="https://cdn.resize.sparkplatform.com/cab/640x480/true/20240701153614764543000000-o.jpg" alt="Casa Della" loading="lazy">
+    </div>
+    <div class="prop-body">
+      <div class="prop-location">Baja California Sur</div>
+      <div class="prop-name">Casa Della</div>
+      <div class="prop-price">Inquire</div>
+      <div class="prop-specs">Residential home · Premium finish</div>
+      <span class="prop-view">View Listing →</span>
+    </div>
+  </a>
+
+  <!-- Casa Nido -->
+  <a class="prop-card reveal" href="https://ricardoamigo.com/for-sale/casa-nido/25-3076" target="_blank">
+    <div class="prop-img-wrap">
+      <img src="https://cdn.resize.sparkplatform.com/cab/640x480/true/20250502165906394501000000-o.jpg" alt="Casa Nido" loading="lazy">
+    </div>
+    <div class="prop-body">
+      <div class="prop-location">Todos Santos</div>
+      <div class="prop-name">Casa Nido</div>
+      <div class="prop-price">Inquire</div>
+      <div class="prop-specs">Unfinished · Investor opportunity</div>
+      <span class="prop-view">View Listing →</span>
+    </div>
+  </a>
+
+  <!-- Las Tunas Beachside -->
+  <a class="prop-card reveal" href="https://ricardoamigo.com/for-sale/las-tunas-beachside/25-4832" target="_blank">
+    <div class="prop-img-wrap">
+      <img src="https://cdn.resize.sparkplatform.com/cab/640x480/true/20250710195337215174000000-o.jpg" alt="Las Tunas Beachside" loading="lazy">
+    </div>
+    <div class="prop-body">
+      <div class="prop-location">Las Tunas</div>
+      <div class="prop-name">Las Tunas Beachside</div>
+      <div class="prop-price">Inquire</div>
+      <div class="prop-specs">Beachside location · Coastal living</div>
+      <span class="prop-view">View Listing →</span>
+    </div>
+  </a>
+
+  <!-- Las Brisas del Pacifico -->
+  <a class="prop-card reveal" href="https://ricardoamigo.com/for-sale/lote-brisas-del-pacifico/25-4778" target="_blank">
+    <div class="prop-img-wrap">
+      <img src="https://cdn.resize.sparkplatform.com/cab/640x480/true/20250707032754530960000000-o.jpg" alt="Las Brisas del Pacifico" loading="lazy">
+    </div>
+    <div class="prop-body">
+      <div class="prop-location">Baja California Sur</div>
+      <div class="prop-name">Las Brisas del Pacifico</div>
+      <div class="prop-price">Inquire</div>
+      <div class="prop-specs">Lot · Pacific coastal views</div>
+      <span class="prop-view">View Listing →</span>
+    </div>
+  </a>
+
+  <!-- Lote Rosily -->
+  <a class="prop-card reveal" href="https://ricardoamigo.com/for-sale/lote-rosily/25-4437" target="_blank">
+    <div class="prop-img-wrap">
+      <img src="https://cdn.resize.sparkplatform.com/cab/640x480/true/20250620203038011748000000-o.jpg" alt="Lote Rosily" loading="lazy">
+    </div>
+    <div class="prop-body">
+      <div class="prop-location">Todos Santos</div>
+      <div class="prop-name">Lote Rosily</div>
+      <div class="prop-price">Inquire</div>
+      <div class="prop-specs">Land lot · Build your vision</div>
+      <span class="prop-view">View Listing →</span>
+    </div>
+  </a>
+
+  <!-- Cactus Casita 14 -->
+  <a class="prop-card reveal" href="https://ricardoamigo.com/for-sale/cactus-casita-14/26-855" target="_blank">
+    <div class="prop-img-wrap">
+      <img src="https://cdn.resize.sparkplatform.com/cab/640x480/true/20260204235655028011000000-o.jpg" alt="Cactus Casita 14" loading="lazy">
+    </div>
+    <div class="prop-body">
+      <div class="prop-location">Todos Santos</div>
+      <div class="prop-name">Cactus Casita 14</div>
+      <div class="prop-price">Inquire</div>
+      <div class="prop-specs">Casita · Desert-coast lifestyle</div>
+      <span class="prop-view">View Listing →</span>
+    </div>
+  </a>
+
+</div>
+
+<!-- BEACH HAVEN LOTS -->
+<div class="section-label reveal" style="padding-top:60px;">
+  <span>Exclusive Lot Portfolio</span>
+  <h2>Las Playitas Heaven — Beach Lots</h2>
+</div>
+
+<div class="lots-strip reveal">
+  <a class="lot-card" href="https://ricardoamigo.com/for-sale/las-playitas-heaven-lot-3/25-295" target="_blank">
+    <div class="lot-label">Las Playitas Heaven</div>
+    <div class="lot-name">Beach Haven Lot 3</div>
+    <div class="lot-price">Contact for Pricing</div>
+    <span class="lot-arrow">→</span>
+  </a>
+  <a class="lot-card" href="https://ricardoamigo.com/for-sale/las-playitas-heaven-lot-5/25-297" target="_blank">
+    <div class="lot-label">Las Playitas Heaven</div>
+    <div class="lot-name">Beach Haven Lot 5</div>
+    <div class="lot-price">Contact for Pricing</div>
+    <span class="lot-arrow">→</span>
+  </a>
+  <a class="lot-card" href="https://ricardoamigo.com/for-sale/las-playitas-heaven-lot-6/25-298" target="_blank">
+    <div class="lot-label">Las Playitas Heaven</div>
+    <div class="lot-name">Beach Haven Lot 6</div>
+    <div class="lot-price">Contact for Pricing</div>
+    <span class="lot-arrow">→</span>
+  </a>
+  <div class="lot-card" style="background:#2a1f1a; cursor:default;">
+    <div class="lot-label">Coming Soon</div>
+    <div class="lot-name">4 More Lots</div>
+    <div class="lot-price" style="color:rgba(221,116,71,0.8);">Ask Billy for details</div>
+    <span class="lot-arrow" style="color:var(--orange);">+</span>
+  </div>
+</div>
+
+<!-- AGENT -->
+<div class="section-label reveal" style="padding-top:70px; padding-bottom:30px;">
+  <span>Your Agent</span>
+  <h2>Meet Billy Friend</h2>
+</div>
+<div class="agent-strip reveal">
+  <div class="agent-avatar">B</div>
+  <div class="agent-info">
+    <div class="agent-name">Billy Friend</div>
+    <div class="agent-title">Luxury Real Estate Specialist · Ricardo Amigo Real Estate</div>
+    <div class="agent-desc">With deep roots in the Baja California Sur market, Billy brings personal knowledge of every community from Todos Santos to Cerritos. He specializes in matching discerning buyers with the properties that truly match their vision — from oceanfront estates to curated building lots.</div>
+    <div class="agent-contact">
+      <a href="mailto:billy@ricardoamigo.com" class="agent-link">billy@ricardoamigo.com</a>
+      <a href="https://ricardoamigo.com" class="agent-link">ricardoamigo.com</a>
+    </div>
+  </div>
+</div>
+
+<!-- LEAD FORM -->
+<section id="contact">
+  <div class="form-box reveal">
+    <div class="form-eyebrow">Private Inquiry</div>
+    <div class="form-title">Request Information</div>
+    <div class="form-sub">Billy will respond personally within 24 hours.</div>
+
+    <div id="form-content">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" id="fname" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" id="lname" placeholder="Last name">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>Phone / WhatsApp</label>
+          <input type="tel" id="phone" placeholder="+1 (000) 000-0000">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Property of Interest</label>
+        <select id="property">
+          <option value="">— Select a property —</option>
+          <option>Bocana Paradise — $950,000</option>
+          <option>Casa Brillante — $1,495,000</option>
+          <option>Rancho Patron</option>
+          <option>Casita Marbella</option>
+          <option>Casa Michelle</option>
+          <option>Surf Villa</option>
+          <option>Secret Ocean Dream</option>
+          <option>Las Playitas Heaven Lots</option>
+          <option>Lote Dulce Amanecer</option>
+          <option>Pescadero Panorama</option>
+          <option>High Cliff</option>
+          <option>Agua Blanca Beachfront 41</option>
+          <option>Casa Milagros</option>
+          <option>Casa Della</option>
+          <option>Casa Nido</option>
+          <option>Las Tunas Beachside</option>
+          <option>Las Brisas del Pacifico</option>
+          <option>Lote Rosily</option>
+          <option>Cactus Casita 14</option>
+          <option>Multiple / Not Sure Yet</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Your Timeline & Message</label>
+        <textarea id="message" placeholder="Tell Billy about your interest — timeline, budget range, questions…"></textarea>
+      </div>
+
+      <button class="form-submit" onclick="submitForm()">Send Inquiry to Billy →</button>
+      <p class="form-note">Your information is kept strictly confidential.</p>
+    </div>
+
+    <div class="form-success" id="form-success">
+      <h3>Thank you.</h3>
+      <p style="color:rgba(255,255,255,0.6); margin-top:10px;">Billy will be in touch with you shortly.<br>In the meantime, continue exploring the portfolio above.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="https://ricardoamigo.com" class="foot-logo">
+    <img src="https://todossantosmexicorealestate.com/assets/img/logo.svg" alt="RARE">
+  </a>
+  <p>© 2026 Ricardo Amigo Real Estate · Billy Friend · Todos Santos, BCS, México</p>
+</footer>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), 60);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+reveals.forEach(el => observer.observe(el));
+
+// Stagger children in grids
+document.querySelectorAll('.featured-grid .feat-card, .props-grid .prop-card').forEach((card, i) => {
+  card.style.transitionDelay = (i % 3) * 80 + 'ms';
+});
+
+// Form submit
+function submitForm() {
+  const fname = document.getElementById('fname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  if (!fname || !email) {
+    alert('Please fill in your name and email.');
+    return;
+  }
+  // Build mailto
+  const lname = document.getElementById('lname').value;
+  const phone = document.getElementById('phone').value;
+  const prop  = document.getElementById('property').value;
+  const msg   = document.getElementById('message').value;
+  const body  = `Name: ${fname} ${lname}\nEmail: ${email}\nPhone: ${phone}\nProperty: ${prop}\n\nMessage:\n${msg}`;
+  const mailto = `mailto:billy@ricardoamigo.com?subject=Property Inquiry — ${prop || 'Portfolio'}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailto;
+  document.getElementById('form-content').style.display = 'none';
+  document.getElementById('form-success').classList.add('active');
+}
+</script>
+
+</body>
+</html>
