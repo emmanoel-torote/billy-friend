@@ -219,9 +219,9 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.07); }
 .agent-avatar {
   width: 82px; height: 82px; border-radius: 50%;
   background: var(--blue); flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Cormorant Garamond', serif; font-size: 30px; color: #fff; font-style: italic;
+  overflow: hidden;
 }
+.agent-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .agent-info { flex: 1; min-width: 220px; }
 .agent-name { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 400; margin-bottom: 4px; }
 .agent-title { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
@@ -338,7 +338,7 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.28); }
     </div>
   </a>
   <a class="feat-card reveal" href="https://ricardoamigo.com/for-sale/rancho-patron/25-3645" target="_blank">
-    <img src="images/patron.jpg" alt="Rancho Patron">
+    <img src="images/rancho.jpg" alt="Rancho Patron">
     <div class="feat-over">
       <span class="feat-badge">Featured</span>
       <div class="feat-loc">Pescadero · Oceanfront</div>
@@ -563,7 +563,7 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.28); }
 </div>
 <div class="agent-wrap reveal">
   <div class="agent-card">
-    <div class="agent-avatar">B</div>
+    <div class="agent-avatar"><img src="images/billy.jpg" alt="Billy Friend"></div>
     <div class="agent-info">
       <div class="agent-name">Billy Friend</div>
       <div class="agent-title">Luxury Real Estate Specialist · Ricardo Amigo Real Estate</div>
