@@ -338,7 +338,7 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.28); }
     </div>
   </a>
   <a class="feat-card reveal" href="https://ricardoamigo.com/for-sale/rancho-patron/25-3645" target="_blank">
-    <img src="images/patron.jpg" alt="Rancho Patron">
+    <img src="images/rancho.jpg" alt="Rancho Patron">
     <div class="feat-over">
       <span class="feat-badge">Featured</span>
       <div class="feat-loc">Pescadero · Oceanfront</div>
@@ -569,7 +569,7 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.28); }
       <div class="agent-title">Luxury Real Estate Specialist · Ricardo Amigo Real Estate</div>
       <p class="agent-bio">With deep roots across Todos Santos, Pescadero and Cerritos, Billy brings genuine on-the-ground knowledge to every transaction. He specializes in connecting discerning buyers with properties that match not just a budget, but a vision — from oceanfront ranches to carefully chosen building lots.</p>
       <div class="agent-contacts">
-        <a href="mailto:billy@ricardoamigo.com">billy@ricardoamigo.com</a>
+        <a href="/cdn-cgi/l/email-protection#fa9893969683ba8893999b889e959b97939d95d4999597"><span class="__cf_email__" data-cfemail="06646f6a6a7f46746f6567746269676b6f61692865696b">[email&#160;protected]</span></a>
         <a href="https://ricardoamigo.com" target="_blank">ricardoamigo.com</a>
         <a href="https://wa.me/152624152368" target="_blank">WhatsApp</a>
       </div>
@@ -639,7 +639,7 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.28); }
   <p>© 2026 Ricardo Amigo Real Estate · Billy Friend · Todos Santos, BCS, México</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
 });
@@ -650,14 +650,47 @@ document.querySelectorAll('.reveal').forEach((el, i) => {
   el.style.transitionDelay = (i % 4) * 70 + 'ms';
   obs.observe(el);
 });
-function submitForm() {
+async function submitForm() {
   const fn = document.getElementById('fn').value.trim();
   const em = document.getElementById('em').value.trim();
   if (!fn || !em) { alert('Please enter your name and email.'); return; }
-  const body = `Name: ${fn} ${document.getElementById('ln').value}\nEmail: ${em}\nPhone: ${document.getElementById('ph').value}\nProperty: ${document.getElementById('pr').value}\n\n${document.getElementById('ms').value}`;
-  window.location.href = `mailto:billy@ricardoamigo.com?subject=Property Inquiry — ${document.getElementById('pr').value || 'Portfolio'}&body=${encodeURIComponent(body)}`;
-  document.getElementById('f-main').style.display = 'none';
-  document.getElementById('f-done').classList.add('on');
+
+  const property = document.getElementById('pr').value || 'Not specified';
+  const data = {
+    access_key: "fb3dc256-6302-4cf1-8955-65e37191e549",
+    subject: "[billy-landing] Property Inquiry — " + property,
+    from_name: fn + " " + document.getElementById('ln').value,
+    email: em,
+    phone: document.getElementById('ph').value,
+    property: property,
+    message: document.getElementById('ms').value,
+    botcheck: ""
+  };
+
+  const btn = document.querySelector('.f-submit');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const json = await res.json();
+    if (json.success) {
+      document.getElementById('f-main').style.display = 'none';
+      document.getElementById('f-done').classList.add('on');
+    } else {
+      alert('Something went wrong. Please try again.');
+      btn.textContent = 'Send Inquiry to Billy →';
+      btn.disabled = false;
+    }
+  } catch(e) {
+    alert('Connection error. Please try again.');
+    btn.textContent = 'Send Inquiry to Billy →';
+    btn.disabled = false;
+  }
 }
 </script>
 </body>
